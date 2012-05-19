@@ -67,7 +67,7 @@ CCLIBFLAGS = $(LIBFLAGS)
 ########## End of flags from header.mak
 
 
-CPP_FILES =	camera.cpp hud.cpp project3.cpp scene.cpp stereo.cpp targets.cpp
+CPP_FILES =	camera.cpp hud.cpp project4.cpp scene.cpp stereo.cpp targets.cpp
 C_FILES =	
 PS_FILES =	
 S_FILES =	
@@ -80,10 +80,10 @@ OBJFILES =	camera.o hud.o scene.o stereo.o targets.o
 # Main targets
 #
 
-all:	project3 
+all:	project4 
 
-project3:	project3.o $(OBJFILES)
-	$(CXX) $(CXXFLAGS) -o project3 project3.o $(OBJFILES) $(CCLIBFLAGS)
+project4:	project4.o $(OBJFILES)
+	$(CXX) $(CXXFLAGS) -o project4 project4.o $(OBJFILES) $(CCLIBFLAGS)
 
 #
 # Dependencies
@@ -91,7 +91,7 @@ project3:	project3.o $(OBJFILES)
 
 camera.o:	camera.h
 hud.o:	camera.h hud.h scene.h
-project3.o:	camera.h hud.h scene.h stereo.h targets.h
+project4.o:	camera.h hud.h scene.h stereo.h targets.h
 scene.o:	scene.h vecmath.h
 stereo.o:	camera.h stereo.h
 targets.o:	scene.h targets.h
@@ -106,7 +106,7 @@ archive.tgz:	$(SOURCEFILES) Makefile README
 	tar cf - $(SOURCEFILES) Makefile README | gzip > archive.tgz
 
 clean:
-	-/bin/rm $(OBJFILES) project3.o core 2> /dev/null
+	-/bin/rm $(OBJFILES) project4.o core 2> /dev/null
 
 realclean:        clean
-	-/bin/rm -rf project3 
+	-/bin/rm -rf project4 
