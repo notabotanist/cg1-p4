@@ -228,3 +228,72 @@ void Radar::animate() {
 
 	rotation = (rotation + dR) % 360;
 }
+
+Generator::Generator(Target& ward, float x, float y, float z)
+		: Radar(x, y, z), _ward(ward) {
+}
+
+void Generator::animate() {
+	Target::animate();
+
+	rotation = atan2(z - _ward.z, _ward.x - x) * 57.2957; // 180 / PI
+}
+
+
+Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z) {
+	setBound(2);
+	setScale(0.5);
+}
+
+void Zeppelin::addGuardian(Target& guard) {
+	guardians.push_back(&guard);
+}
+
+void Zeppelin::animate() {
+	Target::animate();
+
+	// Sheild remains up while guardians alive
+	if (state == T_EXPLODING) {
+		// check all guardians
+		for (vector<Target*>::iterator iter(guardians.begin());
+				iter != guardians.end(); iter++) {
+			// if any one is not dead, the sheild caught the laser
+			if ((*iter)->state != T_DEAD) {
+				state = T_IDLE;
+				break;
+			}
+		}
+	}
+}
+
+void Zeppelin::renderIdle() {
+	glPushMatrix();
+
+	// draw envelope
+	glColor3f(0, 1, 0);
+	glPushMatrix();
+	glScalef(1, 1, 2);
+	if (solid) {
+		glutSolidSphere(1.0, 32, 16);
+	} else {
+		glutWireSphere(1.0, 32, 16);
+	}
+
+	// draw gondola
+	glTranslatef(0, -1, -0.07);
+	glScalef(0.274, 0.247, 0.344);
+	if (solid) {
+		glutSolidCube(2.0);
+	} else {
+		glutWireCube(2.0);
+	}
+	glPopMatrix();
+
+	// searchlight goes here
+
+	glPopMatrix();
+}
+
+void Zeppelin::renderReticle() {
+	// render that
+}

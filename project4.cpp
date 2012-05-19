@@ -160,15 +160,22 @@ void populateScene(Scene& scene) {
 	// add hud
 	scene.addGeometry(*hud);
 
+	// add zeppelin
+	Zeppelin* zep = new Zeppelin(0, 4.5, 0);
+	allTargets[0] = zep;
+	scene.addGeometry(*zep);
+
 	// add radar installations
 	float alleySize = 3.7; // distance between buildings
 	float halfAlley = alleySize / 2;
 
 	int radarCoords[] = {1, 0,  0, 3,  -3, -4,  -6, 1,  -8, 4};
-	for (int i(0); i < NUM_TARGETS; i++) {
-		allTargets[i] = new Radar(radarCoords[2*i] * halfAlley, 0,
-					  radarCoords[2*i + 1] * halfAlley);
+	for (int i(1); i < NUM_TARGETS; i++) {
+		allTargets[i] = new Generator(*zep,
+					radarCoords[2*i] * halfAlley, 0,
+					radarCoords[2*i + 1] * halfAlley);
 		scene.addGeometry(*allTargets[i]);
+		zep->addGuardian(*allTargets[i]);
 	}
 	allTargets[4]->y = 4;	// put this one on top of the building
 
