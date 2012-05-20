@@ -81,6 +81,27 @@ public:
 	}
 };
 
+class LitScene : public Scene {
+public:
+	virtual void render() {
+		// Prepare lighting
+		GLfloat ambLight[] = {0.3, 0.3, 0.5, 1.0};
+		GLfloat moonLight[] = {1, 1, 1, 1.0};
+		GLfloat moonDir[] = {1, 1, 0.1, 0};
+		// TODO: toggle via keyboard
+		glEnable(GL_LIGHTING);
+		// ambient
+		glLightfv(GL_LIGHT0, GL_AMBIENT, ambLight);
+		// moonlight
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLight);
+		//glLightfv(GL_LIGHT1, GL_POSITION, moonDir);
+		// also fog?
+
+		// defer to super
+		Scene::render();
+	}
+};
+
 /// Globals and prototypes
 static StereoSceneViewport* sv;
 static Hud* hud;
@@ -252,7 +273,7 @@ int main( int argc, char* argv[] ) {
 	glutCreateWindow(argv[0]);
 
 	// create scene
-	Scene theScene;
+	LitScene theScene;
 	
 	sv = new StereoSceneViewport(theScene);
 	sv->initProjection(60, 1, 40);
