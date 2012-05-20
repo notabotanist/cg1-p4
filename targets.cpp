@@ -282,7 +282,7 @@ void Zeppelin::renderIdle() {
 	glPushMatrix();
 
 	// draw envelope
-	glColor3f(0, 1, 0);
+	glColor3f(0, 0.8, 0);
 	glPushMatrix();
 	glScalef(1, 1, 2);
 	if (solid) {
@@ -294,6 +294,7 @@ void Zeppelin::renderIdle() {
 	// draw gondola
 	glTranslatef(0, -1, -0.07);
 	glScalef(0.274, 0.247, 0.344);
+	glColor3f(0.7, 0.7, 0.7);
 	if (solid) {
 		glutSolidCube(2.0);
 	} else {

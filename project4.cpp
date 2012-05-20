@@ -161,7 +161,7 @@ void populateScene(Scene& scene) {
 	scene.addGeometry(*hud);
 
 	// add zeppelin
-	Zeppelin* zep = new Zeppelin(0, 4.5, 0);
+	Zeppelin* zep = new Zeppelin(0, 5, 0);
 	allTargets[0] = zep;
 	scene.addGeometry(*zep);
 
