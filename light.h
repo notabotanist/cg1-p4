@@ -8,6 +8,19 @@
 
 #include "scene.h"
 
+/// asdf
+class LightManager {
+private:
+	static int curLight;
+
+private:
+	LightManager();
+
+public:
+	static int getNextLight();
+	static void resetLights();
+}
+
 /// Class for positional & directional lights
 /// but not ambient light.
 class Light : public Geometry {
