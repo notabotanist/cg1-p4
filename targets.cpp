@@ -240,7 +240,8 @@ void Generator::animate() {
 }
 
 
-Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z) {
+Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z),
+		radius(5), radVel(0.001), radPos(0) {
 	setBound(2);
 	setScale(0.5);
 }
@@ -264,6 +265,17 @@ void Zeppelin::animate() {
 			}
 		}
 	}
+
+	// Animate holding pattern
+	radPos += radVel;
+	if (radPos > 6.28318) {
+		radPos = 0;
+	}
+	// update position
+	x = radius * cos(radPos);
+	z = -radius * sin(radPos);
+	// rotate up
+	yaw = (radPos + 3.14159) * 57.29583;
 }
 
 void Zeppelin::renderIdle() {
@@ -296,4 +308,9 @@ void Zeppelin::renderIdle() {
 
 void Zeppelin::renderReticle() {
 	// render that
+}
+
+void Zeppelin::respawn() {
+	Target::respawn();
+	radPos = 0;
 }

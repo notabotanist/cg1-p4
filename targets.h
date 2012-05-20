@@ -37,7 +37,7 @@ public:
 	void lockOn();
 
 	// Reset target to idle state
-	void respawn();
+	virtual void respawn();
 };
 
 /// @author mrm4677
@@ -77,11 +77,18 @@ public:
 };
 
 /// Mobile enemy command fortress, protected by a number of shield generators
+/// Flies circular holding pattern around the city
 class Zeppelin : public Target {
 private:
 	/// as long as any guardian is alive, the Zeppelin cannot be destroyed
 	/// Zeppelin does not take ownership of these guardians
 	vector<Target*> guardians;
+
+protected:
+	/// animation information
+	float radius;
+	float radVel;
+	float radPos;
 
 protected:
 	virtual void renderIdle();
@@ -94,6 +101,9 @@ public:
 
 	/// Add a guardian
 	void addGuardian(Target& guard);
+
+	/// Reset the position too
+	virtual void respawn();
 };
 
 #endif
