@@ -67,14 +67,14 @@ CCLIBFLAGS = $(LIBFLAGS)
 ########## End of flags from header.mak
 
 
-CPP_FILES =	camera.cpp hud.cpp project4.cpp scene.cpp stereo.cpp targets.cpp
+CPP_FILES =	camera.cpp hud.cpp project4.cpp scene.cpp stereo.cpp targets.cpp light.cpp
 C_FILES =	
 PS_FILES =	
 S_FILES =	
-H_FILES =	camera.h hud.h scene.h stereo.h targets.h vecmath.h
+H_FILES =	camera.h hud.h scene.h stereo.h targets.h vecmath.h light.h
 SOURCEFILES =	$(H_FILES) $(CPP_FILES) $(C_FILES) $(S_FILES)
 .PRECIOUS:	$(SOURCEFILES)
-OBJFILES =	camera.o hud.o scene.o stereo.o targets.o 
+OBJFILES =	camera.o hud.o scene.o stereo.o targets.o light.o
 
 #
 # Main targets
@@ -91,10 +91,11 @@ project4:	project4.o $(OBJFILES)
 
 camera.o:	camera.h
 hud.o:	camera.h hud.h scene.h
-project4.o:	camera.h hud.h scene.h stereo.h targets.h
+project4.o:	camera.h hud.h scene.h stereo.h targets.h light.h
 scene.o:	scene.h vecmath.h
 stereo.o:	camera.h stereo.h
 targets.o:	scene.h targets.h
+light.o:	light.h
 
 #
 # Housekeeping

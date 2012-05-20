@@ -1,8 +1,8 @@
 // File: project3.cpp
-// 
+//
 // Author: Matthew MacEwan
 //
-// ///////////////////////////////////////////////////////////////////// 
+// /////////////////////////////////////////////////////////////////////
 
 #include <cstdlib>
 #include <GL/glut.h>
@@ -11,6 +11,7 @@
 #include "camera.h"
 #include "targets.h"
 #include "hud.h"
+#include "light.h"
 
 class StereoSceneViewport : public StereoViewport {
 public:
@@ -85,15 +86,17 @@ class LitScene : public Scene {
 public:
 	virtual void render() {
 		// Prepare lighting
+		LightManager::resetLights();
 		GLfloat ambLight[] = {0.3, 0.3, 0.5, 1.0};
-		GLfloat moonLight[] = {1, 1, 1, 1.0};
-		GLfloat moonDir[] = {1, 1, 0.1, 0};
+		//GLfloat moonLight[] = {1, 1, 1, 1.0};
+		//GLfloat moonDir[] = {1, 1, 0.1, 0};
 		// TODO: toggle via keyboard
 		glEnable(GL_LIGHTING);
 		// ambient
-		glLightfv(GL_LIGHT0, GL_AMBIENT, ambLight);
+		GLenum amb = LightManager::getNextLight();
+		glLightfv(amb, GL_AMBIENT, ambLight);
 		// moonlight
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLight);
+		//glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLight);
 		//glLightfv(GL_LIGHT1, GL_POSITION, moonDir);
 		// also fog?
 
@@ -125,7 +128,7 @@ static void glkeyboard(unsigned char key, int x, int y) {
 	case 'r':
 		resetScene();
 		break;
-	case 'q': 
+	case 'q':
 		exit(0);
 		break;
 	case 0x1b:
@@ -181,6 +184,11 @@ void populateScene(Scene& scene) {
 	// add hud
 	scene.addGeometry(*hud);
 
+    // add lights
+    Light* moon = new Light(0,5,0);
+    moon->assignColor3f(1, 1, 1);
+    scene.addGeometry(*moon);
+
 	// add zeppelin
 	Zeppelin* zep = new Zeppelin(0, 5, 0);
 	allTargets[0] = zep;
@@ -209,6 +217,8 @@ void populateScene(Scene& scene) {
 
 	// add floor
 	scene.addGeometry(*(new Floor(5*alleySize)));
+
+	scene.setAllSolid(true);
 }
 
 /// Moves sv's camera to its set original position and also repawns all targets
@@ -241,7 +251,7 @@ void paintPickTarget() {
 	// locate closest target
 	Geometry* target;
 	target = sv->scene.pickRay(cx, cy, cz, nx, ny, nz);
-	
+
 	if (target == NULL) {
 		// pick ray intersected nothing
 		hud->startWarning();
@@ -274,7 +284,7 @@ int main( int argc, char* argv[] ) {
 
 	// create scene
 	LitScene theScene;
-	
+
 	sv = new StereoSceneViewport(theScene);
 	sv->initProjection(60, 1, 40);
 	sv->cam.updateScreenCenter();
