@@ -8,7 +8,8 @@
 
 #include "scene.h"
 
-/// asdf
+/// Tracks available OpenGL lights and assigns them incrementally with each
+/// rendering pass.
 class LightManager {
 private:
 	static int curLight;
@@ -20,6 +21,20 @@ public:
 	static int getNextLight();
 	static void resetLights();
 };
+
+///
+class GlobalMaterials {
+private:
+    GlobalMaterials() {};
+
+public:
+    static void setNoMaterial();
+    static void setBuildingMaterial();
+    static void setGroundMaterial();
+    static void setDishMaterial();
+    static void setExplosionMaterial();
+    static void setLaserMaterial();
+}
 
 /// Class for positional & directional lights
 /// but not ambient light.

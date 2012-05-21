@@ -87,7 +87,7 @@ public:
 	virtual void render() {
 		// Prepare lighting
 		LightManager::resetLights();
-		GLfloat ambLight[] = {0.3, 0.3, 0.5, 1.0};
+		GLfloat ambLight[] = {0.1, 0.1, 0.1, 1.0};
 		//GLfloat moonLight[] = {1, 1, 1, 1.0};
 		//GLfloat moonDir[] = {1, 1, 0.1, 0};
 		// TODO: toggle via keyboard
@@ -185,8 +185,9 @@ void populateScene(Scene& scene) {
 	scene.addGeometry(*hud);
 
     // add lights
-    Light* moon = new Light(0,5,0);
-    moon->assignColor3f(1, 1, 1);
+    Light* moon = new Light(-1,-1,-0.5);
+    moon->assignColor3f(0, 0, 0.5);
+    moon->directional = true;
     scene.addGeometry(*moon);
 
 	// add zeppelin

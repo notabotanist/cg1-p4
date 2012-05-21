@@ -4,6 +4,7 @@
 
 #include "light.h"
 #include <GL/glut.h>
+#include <cmath>
 
 /////////
 // LightManager
@@ -39,8 +40,15 @@ void Light::doRender() {
         return;
     }
 
+    GLfloat* lightPos;
     // prepare light data
-    GLfloat lightPos[] = {x, y, z, (directional)?0:1};
+    if (directional) {
+        GLfloat dlightPos[] = {x, y, z, 0}; // Change to use trig with yaw and pitch as you dare
+        lightPos = dlightPos;
+    } else {
+        GLfloat plightPos[] = {x, y, z, 1};
+        lightPos = plightPos;
+    }
 
     // position and set light color
     glLightfv(lightHandle, GL_POSITION, lightPos);
