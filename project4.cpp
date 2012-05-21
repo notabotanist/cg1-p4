@@ -89,6 +89,8 @@ class LitScene : public Scene {
 public:
     bool fog;
 
+    LitScene() : Scene(), fog(true) {}
+
 	virtual void render() {
 	    // Enable fog
 	    if (fog) {
