@@ -61,4 +61,21 @@ public:
     void assignColor3f(float r, float g, float b);
 };
 
+
+/// Class representing a spotlight.  Makes use of similar data to normal
+/// positional lights.
+class SpotLight : public Light {
+public:
+	float halfAngle;
+	float exponent;
+
+protected:
+	virtual void doRender();
+
+public:
+	SpotLight(float _x = 0, float _y = 0, float _z = 0);
+	virtual ~SpotLight() {};
+
+};
+
 #endif

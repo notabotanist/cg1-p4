@@ -249,6 +249,9 @@ Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z),
 	setBound(2);
 	setScale(0.5);
 	searchlight.assignColor3f(1, 1, 0);
+	searchlight.halfAngle = 60;
+	searchlight.exponent = 5;
+	searchlight.pitch = -120;
 }
 
 void Zeppelin::addGuardian(Target& guard) {

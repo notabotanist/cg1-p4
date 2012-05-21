@@ -111,3 +111,21 @@ void Light::assignColor3f(float r, float g, float b) {
     color[1] = g;
     color[2] = b;
 }
+
+////////////////
+// SpotLight
+////////////////
+SpotLight::SpotLight(float _x, float _y, float _z) : Light(_x, _y, _z),
+        halfAngle(180), exponent(0) {
+}
+
+void SpotLight::doRender() {
+    Light::doRender();
+
+    // Trig not required since Geometry will have already set up the rotation
+    GLfloat spotdir[] = {0, 0, -1};
+    glLightfv(lightHandle, GL_SPOT_DIRECTION, spotdir);
+
+    glLightf(lightHandle, GL_SPOT_CUTOFF, halfAngle);
+    glLightf(lightHandle, GL_SPOT_EXPONENT, exponent);
+}

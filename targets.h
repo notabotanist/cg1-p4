@@ -85,8 +85,8 @@ private:
 	/// Zeppelin does not take ownership of these guardians
 	vector<Target*> guardians;
 
-	/// Mobile light source.  TODO: upgrade to spotlight
-	Light searchlight;
+	/// Mobile light source.
+	SpotLight searchlight;
 
 protected:
 	/// animation information
