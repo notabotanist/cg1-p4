@@ -1,6 +1,6 @@
 // File: targets.h
 //
-// ////////////////////////////////////////////////////////////////////// 
+// //////////////////////////////////////////////////////////////////////
 
 #ifndef TARGETS_H_
 #define TARGETS_H_
@@ -83,6 +83,9 @@ private:
 	/// as long as any guardian is alive, the Zeppelin cannot be destroyed
 	/// Zeppelin does not take ownership of these guardians
 	vector<Target*> guardians;
+
+	/// Mobile light source.  TODO: upgrade to spotlight
+	Light searchlight;
 
 protected:
 	/// animation information
