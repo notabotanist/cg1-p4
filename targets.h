@@ -6,6 +6,7 @@
 #define TARGETS_H_
 
 #include "scene.h"
+#include "light.h"
 
 /// @author mrm4677
 /// Base class for geometry objects which can be targeted

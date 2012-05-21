@@ -7,7 +7,6 @@
 #include <cmath>
 #include <GL/glut.h>
 #include "targets.h"
-#include "light.h"
 
 static const int TIME_TO_IMPACT = 100; // frames
 static const int EXPLOSION_TIME = 25; // frames
@@ -246,9 +245,10 @@ void Generator::animate() {
 
 
 Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z),
-		radius(5), radVel(0.001), radPos(0) {
+		radius(5), radVel(0.001), radPos(0), searchlight(0,-1,0.2) {
 	setBound(2);
 	setScale(0.5);
+	searchlight.assignColor3f(1, 1, 0);
 }
 
 void Zeppelin::addGuardian(Target& guard) {
@@ -310,6 +310,7 @@ void Zeppelin::renderIdle() {
 	glPopMatrix();
 
 	// searchlight goes here
+	searchlight.render();
 
 	glPopMatrix();
 }
