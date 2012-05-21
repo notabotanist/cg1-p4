@@ -48,10 +48,33 @@ void GlobalMaterials::setBuildingMaterial() {
 
 void GlobalMaterials::setGroundMaterial() {
     GlobalMaterials::setNoMaterial();
-    GLfloat ambient[] = {0.2, 0.2, 0.2, 1};
+    GLfloat ambient[] = {0, 0.2, 0, 1};
     GLfloat diffuse[] = {0, 0.5, 0, 1}; // green grass
     glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+}
+
+void GlobalMaterials::setDishMaterial() {
+    GlobalMaterials::setNoMaterial();
+    GLfloat ambient[] = {0, 0, 0, 1};
+    GLfloat diffuse[] = {0.8, 0.8, 0.8, 1};
+    GLfloat specular[] = {1.0, 1.0, 1.0, 1};
+    glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+    glMaterialf(GL_FRONT, GL_SHININESS, 70);
+}
+
+void GlobalMaterials::setExplosionMaterial() {
+    GlobalMaterials::setNoMaterial();
+    GLfloat emissive[] = {1.0, 0.55, 0, 1};
+    glMaterialfv(GL_FRONT, GL_EMISSION, emissive);
+}
+
+void GlobalMaterials::setLaserMaterial() {
+    GlobalMaterials::setNoMaterial();
+    GLfloat emissive[] = {1, 0, 1, 1};
+    glMaterialfv(GL_FRONT, GL_EMISSION, emissive);
 }
 
 ////////////

@@ -7,6 +7,7 @@
 #include <cmath>
 #include <GL/glut.h>
 #include "targets.h"
+#include "light.h"
 
 static const int TIME_TO_IMPACT = 100; // frames
 static const int EXPLOSION_TIME = 25; // frames
@@ -20,6 +21,7 @@ void Target::renderExplosion() {
 
 	float scale = sqrt((EXPLOSION_TIME + 1 - ttl) / (float)EXPLOSION_TIME);
 	glScalef(scale, scale, scale);
+	GlobalMaterials::setExplosionMaterial();
 	glColor3ub(0xFF, 0x8C, 0);
 	if (solid) {
 		glutSolidSphere(2.0, 10, 5);
@@ -36,6 +38,7 @@ void Target::renderMissile() {
 		glScalef(0.1, 50, 0.1);
 		glTranslatef(0, 0.5, 0);
 		glColor3f(1, 0, 1);
+		GlobalMaterials::setLaserMaterial();
 		if (solid) {
 			glutSolidCube(1.0);
 		} else {
@@ -110,6 +113,7 @@ void Radar::renderIdle() {
 
 	// green for 'shoot me!'
 	glColor3f(0, 1, 0);
+	GlobalMaterials::setBuildingMaterial();
 	// draw base
 	glPushMatrix();
 	glTranslatef(0, 0.371, 0);
@@ -125,6 +129,7 @@ void Radar::renderIdle() {
 	glRotatef(rotation, 0, 1, 0);
 
 	// draw arm
+	GlobalMaterials::setDishMaterial();
 	glPushMatrix();
 	glTranslatef(0, 0.742, 0.393);
 	glScalef(0.557, 1.023, 0.557);
@@ -283,6 +288,7 @@ void Zeppelin::renderIdle() {
 
 	// draw envelope
 	glColor3f(0, 0.8, 0);
+	GlobalMaterials::setDishMaterial();
 	glPushMatrix();
 	glScalef(1, 1, 2);
 	if (solid) {
@@ -295,6 +301,7 @@ void Zeppelin::renderIdle() {
 	glTranslatef(0, -1, -0.07);
 	glScalef(0.274, 0.247, 0.344);
 	glColor3f(0.7, 0.7, 0.7);
+	GlobalMaterials::setBuildingMaterial();
 	if (solid) {
 		glutSolidCube(2.0);
 	} else {

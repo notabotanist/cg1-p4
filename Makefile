@@ -94,7 +94,7 @@ hud.o:	camera.h hud.h scene.h
 project4.o:	camera.h hud.h scene.h stereo.h targets.h light.h
 scene.o:	scene.h vecmath.h
 stereo.o:	camera.h stereo.h
-targets.o:	scene.h targets.h
+targets.o:	scene.h targets.h light.h
 light.o:	light.h
 
 #
