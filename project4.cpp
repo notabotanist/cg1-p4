@@ -87,7 +87,21 @@ public:
 
 class LitScene : public Scene {
 public:
+    bool fog;
+
 	virtual void render() {
+	    // Enable fog
+	    if (fog) {
+            glEnable(GL_FOG);
+            GLfloat fogColor[] = {0.2, 0.2, 0.2, 1};
+            glFogfv(GL_FOG_COLOR, fogColor);
+            glFogf(GL_FOG_MODE, GL_EXP);
+            glFogf(GL_FOG_DENSITY, 0.02);
+            //glFogf(GL_FOG_START, 6);
+            //glFogf(GL_FOG_END, 20);
+	    } else {
+	        glDisable(GL_FOG);
+	    }
 		// Prepare lighting
 		LightManager::resetLights();
 		GLfloat ambLight[] = {0.1, 0.1, 0.1, 1.0};
@@ -101,7 +115,6 @@ public:
 		// moonlight
 		//glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLight);
 		//glLightfv(GL_LIGHT1, GL_POSITION, moonDir);
-		// also fog?
 
 		// defer to super
 		Scene::render();
@@ -133,6 +146,9 @@ static void glkeyboard(unsigned char key, int x, int y) {
 		break;
 	case 'q':
 		exit(0);
+		break;
+    case 'f':
+		((LitScene&)(sv->scene)).fog = !(((LitScene&)(sv->scene)).fog);
 		break;
 	case 0x1b:
 		sv->cam.uncaptureMouse();
