@@ -62,7 +62,7 @@ void GlobalMaterials::setDishMaterial() {
     glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-    glMaterialf(GL_FRONT, GL_SHININESS, 70);
+    glMaterialf(GL_FRONT, GL_SHININESS, 10);
 }
 
 void GlobalMaterials::setExplosionMaterial() {
