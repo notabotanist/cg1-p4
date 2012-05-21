@@ -22,7 +22,8 @@ public:
 	static void resetLights();
 };
 
-///
+/// static class
+/// call setFooMaterial just prior to creating the relevant object
 class GlobalMaterials {
 private:
     GlobalMaterials() {};
@@ -34,7 +35,7 @@ public:
     static void setDishMaterial();
     static void setExplosionMaterial();
     static void setLaserMaterial();
-}
+};
 
 /// Class for positional & directional lights
 /// but not ambient light.

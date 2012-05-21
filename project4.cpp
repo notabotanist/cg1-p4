@@ -35,7 +35,9 @@ protected:
 	virtual void doRender() {
 		glPushMatrix();
 
+        GlobalMaterials::setBuildingMaterial();
 		glColor3ub(127, 127, 127);
+
 		// Align base of building with floor
 		glTranslatef(0, height/2, 0);
 		glScalef(base, height, base);
@@ -63,6 +65,7 @@ public:
 
 protected:
 	virtual void doRender() {
+	    GlobalMaterials::setGroundMaterial();
 		glColor3ub(0, 127, 0);
 
 		if (solid) {
