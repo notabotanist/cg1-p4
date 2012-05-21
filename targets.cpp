@@ -321,6 +321,17 @@ void Zeppelin::renderIdle() {
 
 void Zeppelin::renderReticle() {
 	// render that
+	glColor3f(0.9, 0, 0);
+	GlobalMaterials::setInterfaceMaterial(0.9, 0, 0);
+
+	float reticleRadius(2);
+
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0, reticleRadius, 0);
+		glVertex3f(reticleRadius, 0, 0);
+		glVertex3f(0, -reticleRadius, 0);
+		glVertex3f(-reticleRadius, 0, 0);
+	glEnd();
 }
 
 void Zeppelin::respawn() {
