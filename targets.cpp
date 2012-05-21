@@ -167,6 +167,7 @@ void Radar::renderReticle() {
 
 	// red for ROCK ON
 	glColor3f(0.9, 0, 0);
+	GlobalMaterials::setInterfaceMaterial(0.9, 0, 0);
 	// draw all corner caps
 	glBegin(GL_LINES);
 		glVertex3f(minx, miny, minz);

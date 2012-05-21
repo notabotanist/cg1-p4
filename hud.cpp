@@ -5,6 +5,7 @@
 
 #include "hud.h"
 #include "camera.h"
+#include "light.h"
 #include<GL/glut.h>
 #include<cmath>
 
@@ -39,6 +40,7 @@ void Hud::fixLCS() {
 void Hud::drawWarn() {
 	// warn X is red
 	glColor3f(1, 0, 0);
+	GlobalMaterials::setInterfaceMaterial(1, 0, 0);
 	float retExtent = reticleOffset + reticleLength;
 
 	glBegin(GL_LINES);
@@ -52,6 +54,7 @@ void Hud::drawWarn() {
 void Hud::doRender() {
 	// crosshairs are white
 	glColor3f(1, 1, 1);
+	GlobalMaterials::setInterfaceMaterial(1, 1, 1);
 	float retExtent = reticleOffset + reticleLength;
 	glBegin(GL_LINES);
 		glVertex3f(reticleOffset, 0, 0);

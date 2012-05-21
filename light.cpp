@@ -77,6 +77,12 @@ void GlobalMaterials::setLaserMaterial() {
     glMaterialfv(GL_FRONT, GL_EMISSION, emissive);
 }
 
+void GlobalMaterials::setInterfaceMaterial(float r, float g, float b) {
+    GlobalMaterials::setNoMaterial();
+    GLfloat emissive[] = {r, g, b, 1};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emissive);
+}
+
 ////////////
 // Light
 ////////////

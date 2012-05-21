@@ -90,7 +90,7 @@ project4:	project4.o $(OBJFILES)
 #
 
 camera.o:	camera.h
-hud.o:	camera.h hud.h scene.h
+hud.o:	camera.h hud.h scene.h light.h
 project4.o:	camera.h hud.h scene.h stereo.h targets.h light.h
 scene.o:	scene.h vecmath.h
 stereo.o:	camera.h stereo.h

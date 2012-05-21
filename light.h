@@ -35,6 +35,7 @@ public:
     static void setDishMaterial();
     static void setExplosionMaterial();
     static void setLaserMaterial();
+    static void setInterfaceMaterial(float r, float g, float b);
 };
 
 /// Class for positional & directional lights
