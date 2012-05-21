@@ -60,6 +60,10 @@ public:
     virtual ~Light() {};
 
     void assignColor3f(float r, float g, float b);
+    
+    /// Renders a spherical, emissive representation at the location of
+    /// this light.
+    virtual void renderBulb();
 };
 
 

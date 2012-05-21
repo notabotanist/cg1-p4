@@ -246,7 +246,7 @@ void Generator::animate() {
 
 
 Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z),
-		radius(5), radVel(0.001), radPos(0), searchlight(0,-1,0.2) {
+		radius(5), radVel(0.001), radPos(0), searchlight(0,-1,0.6) {
 	setBound(2);
 	setScale(0.5);
 	searchlight.assignColor3f(1, 1, 0);
@@ -314,7 +314,9 @@ void Zeppelin::renderIdle() {
 	glPopMatrix();
 
 	// searchlight goes here
+	searchlight.setSolid(solid);
 	searchlight.render();
+	searchlight.renderBulb();
 
 	glPopMatrix();
 }

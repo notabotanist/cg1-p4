@@ -118,6 +118,18 @@ void Light::assignColor3f(float r, float g, float b) {
     color[2] = b;
 }
 
+void  Light::renderBulb() {
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    GlobalMaterials::setInterfaceMaterial(color[0], color[1], color[2]);
+    if (solid) {
+	glutSolidSphere(0.1, 4, 3);
+    } else {
+	glutWireSphere(0.1, 4, 3);
+    }
+    glPopMatrix();
+}
+
 ////////////////
 // SpotLight
 ////////////////
