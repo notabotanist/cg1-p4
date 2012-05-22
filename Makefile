@@ -135,7 +135,7 @@ hud.o:	camera.h hud.h scene.h light.h
 project4.o:	camera.h hud.h scene.h stereo.h targets.h light.h texture.h
 scene.o:	scene.h vecmath.h
 stereo.o:	camera.h stereo.h
-targets.o:	scene.h targets.h light.h
+targets.o:	scene.h targets.h light.h texture.h
 light.o:	light.h
 texture.o:	texture.h
 

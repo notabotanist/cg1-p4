@@ -7,6 +7,7 @@
 #include <cmath>
 #include <GL/glut.h>
 #include "targets.h"
+#include "texture.h"
 
 static const int TIME_TO_IMPACT = 100; // frames
 static const int EXPLOSION_TIME = 25; // frames
@@ -118,7 +119,9 @@ void Radar::renderIdle() {
 	glTranslatef(0, 0.371, 0);
 	glScalef(1, 0.371, 1);
 	if(solid) {
-		glutSolidCube(2.0);
+		//glutSolidCube(2.0);
+		glScalef(2, 2, 2);
+		renderTexCube(TextureLoader::getGeneratorTex(), 0, 1);
 	} else {
 		glutWireCube(2.0);
 	}

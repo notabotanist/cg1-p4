@@ -10,6 +10,7 @@ private:
     static unsigned int buildingTex;
     static unsigned int roofTex;
     static unsigned int groundTex;
+    static unsigned int generatorTex;
 
 public:
     /// Load all textures
@@ -26,6 +27,10 @@ public:
 
     static unsigned int getGroundTex() {
         return groundTex;
+    }
+
+    static unsigned int getGeneratorTex() {
+        return generatorTex;
     }
 };
 

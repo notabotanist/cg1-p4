@@ -73,7 +73,7 @@ protected:
 	    GlobalMaterials::setGroundMaterial();
 		glColor3ub(0, 127, 0);
 		glBindTexture(GL_TEXTURE_2D, TextureLoader::getGroundTex());
-		//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		resetTexParameters();
 
 		if (solid) {
@@ -86,6 +86,8 @@ protected:
 			glNormal3f(0,1,0); glTexCoord2i(-numBuildings, -numBuildings); glVertex3f(-extent, 0, -extent);
 			glNormal3f(0,1,0); glTexCoord2i(numBuildings, -numBuildings); glVertex3f(extent, 0, -extent);
 		glEnd();
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 public:

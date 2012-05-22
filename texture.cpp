@@ -12,6 +12,7 @@ using namespace std;
 GLuint TextureLoader::buildingTex(0);
 GLuint TextureLoader::roofTex(0);
 GLuint TextureLoader::groundTex(0);
+GLuint TextureLoader::generatorTex(0);
 
 int TextureLoader::loadTextures() {
     cout << "Loading..." << endl;
@@ -43,6 +44,16 @@ int TextureLoader::loadTextures() {
             SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB);
     if (groundTex == 0) {
         cout << "Ground - Soil error " << SOIL_last_result() << endl;
+        return -1;
+    }
+
+    generatorTex = SOIL_load_OGL_texture(
+            "generator.png",
+            SOIL_LOAD_AUTO,
+            SOIL_CREATE_NEW_ID,
+            SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB);
+    if (generatorTex == 0) {
+        cout << "Generator - Soil error " << SOIL_last_result() << endl;
         return -1;
     }
 
@@ -93,4 +104,6 @@ int renderTexCube(unsigned int sideTex, unsigned int topTex,
         glNormal3f(0,1,0); glTexCoord2f(1,1); glVertex3f(0.5, 0.5, -0.5);
         glNormal3f(0,1,0); glTexCoord2f(0,1); glVertex3f(-0.5, 0.5, -0.5);
     glEnd();
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
