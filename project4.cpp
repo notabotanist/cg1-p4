@@ -77,10 +77,10 @@ protected:
 		} else {
 			glBegin(GL_LINE_LOOP);
 		}
-			glVertex3f(extent, 0, extent);
-			glVertex3f(-extent, 0, extent);
-			glVertex3f(-extent, 0, -extent);
-			glVertex3f(extent, 0, -extent);
+			glNormal3f(0,1,0); glVertex3f(extent, 0, extent);
+			glNormal3f(0,1,0); glVertex3f(-extent, 0, extent);
+			glNormal3f(0,1,0); glVertex3f(-extent, 0, -extent);
+			glNormal3f(0,1,0); glVertex3f(extent, 0, -extent);
 		glEnd();
 	}
 
