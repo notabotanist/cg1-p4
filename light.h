@@ -13,6 +13,7 @@
 class LightManager {
 private:
 	static int curLight;
+	static bool globalLighting;
 
 private:
 	LightManager() {};
@@ -20,6 +21,9 @@ private:
 public:
 	static int getNextLight();
 	static void resetLights();
+
+	static void toggleGlobalLighting();
+	static bool isGlobalLighting();
 };
 
 /// static class
@@ -60,7 +64,7 @@ public:
     virtual ~Light() {};
 
     void assignColor3f(float r, float g, float b);
-    
+
     /// Renders a spherical, emissive representation at the location of
     /// this light.
     virtual void renderBulb();

@@ -10,8 +10,12 @@
 // LightManager
 /////////
 int LightManager::curLight(GL_LIGHT0);
+bool LightManager::globalLighting(true);
 
 int LightManager::getNextLight() {
+    if (!globalLighting) {
+        return -1;
+    }
     int assignedLight(curLight);
     if (assignedLight >= GL_LIGHT0 + GL_MAX_LIGHTS) {
         assignedLight = -1;
@@ -24,6 +28,19 @@ int LightManager::getNextLight() {
 
 void LightManager::resetLights() {
     curLight = GL_LIGHT0;
+}
+
+void LightManager::toggleGlobalLighting() {
+    globalLighting = !globalLighting;
+    if (globalLighting) {
+        glEnable(GL_LIGHTING);
+    } else {
+        glDisable(GL_LIGHTING);
+    }
+}
+
+bool LightManager::isGlobalLighting() {
+    return globalLighting;
 }
 
 //////////////

@@ -110,10 +110,12 @@ public:
 		//GLfloat moonLight[] = {1, 1, 1, 1.0};
 		//GLfloat moonDir[] = {1, 1, 0.1, 0};
 		// TODO: toggle via keyboard
-		glEnable(GL_LIGHTING);
+		//glEnable(GL_LIGHTING);
 		// ambient
-		GLenum amb = LightManager::getNextLight();
-		glLightfv(amb, GL_AMBIENT, ambLight);
+		int amb = LightManager::getNextLight();
+		if (amb > 0) {
+            glLightfv(amb, GL_AMBIENT, ambLight);
+		}
 		// moonlight
 		//glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLight);
 		//glLightfv(GL_LIGHT1, GL_POSITION, moonDir);
@@ -151,6 +153,9 @@ static void glkeyboard(unsigned char key, int x, int y) {
 		break;
     case 'f':
 		((LitScene&)(sv->scene)).fog = !(((LitScene&)(sv->scene)).fog);
+		break;
+    case 'l':
+		LightManager::toggleGlobalLighting();
 		break;
 	case 0x1b:
 		sv->cam.uncaptureMouse();
@@ -303,6 +308,7 @@ int main( int argc, char* argv[] ) {
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(1000, 500);
 	glutCreateWindow(argv[0]);
+	glEnable(GL_LIGHTING);
 
 	// create scene
 	LitScene theScene;
