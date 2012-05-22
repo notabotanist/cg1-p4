@@ -66,21 +66,25 @@ public:
 class Floor : public Geometry {
 public:
 	float extent;
+	int numBuildings;
 
 protected:
 	virtual void doRender() {
 	    GlobalMaterials::setGroundMaterial();
 		glColor3ub(0, 127, 0);
+		glBindTexture(GL_TEXTURE_2D, TextureLoader::getGroundTex());
+		//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+		resetTexParameters();
 
 		if (solid) {
 			glBegin(GL_QUADS);
 		} else {
 			glBegin(GL_LINE_LOOP);
 		}
-			glNormal3f(0,1,0); glVertex3f(extent, 0, extent);
-			glNormal3f(0,1,0); glVertex3f(-extent, 0, extent);
-			glNormal3f(0,1,0); glVertex3f(-extent, 0, -extent);
-			glNormal3f(0,1,0); glVertex3f(extent, 0, -extent);
+			glNormal3f(0,1,0); glTexCoord2i(numBuildings, numBuildings); glVertex3f(extent, 0, extent);
+			glNormal3f(0,1,0); glTexCoord2i(-numBuildings, numBuildings); glVertex3f(-extent, 0, extent);
+			glNormal3f(0,1,0); glTexCoord2i(-numBuildings, -numBuildings); glVertex3f(-extent, 0, -extent);
+			glNormal3f(0,1,0); glTexCoord2i(numBuildings, -numBuildings); glVertex3f(extent, 0, -extent);
 		glEnd();
 	}
 
@@ -251,7 +255,9 @@ void populateScene(Scene& scene) {
 	}
 
 	// add floor
-	scene.addGeometry(*(new Floor(5*alleySize)));
+	Floor* floor = new Floor(5*alleySize);
+	floor->numBuildings = 5;
+	scene.addGeometry(*floor);
 
 	scene.setAllSolid(true);
 }

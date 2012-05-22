@@ -65,8 +65,8 @@ void GlobalMaterials::setBuildingMaterial() {
 
 void GlobalMaterials::setGroundMaterial() {
     GlobalMaterials::setNoMaterial();
-    GLfloat ambient[] = {0, 0.2, 0, 1};
-    GLfloat diffuse[] = {0, 0.5, 0, 1}; // green grass
+    GLfloat ambient[] = {0.2, 0.2, 0.2, 1};
+    GLfloat diffuse[] = {1.0, 1.0, 1.0, 1}; // delegate to texture
     glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 }
