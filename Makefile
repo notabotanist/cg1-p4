@@ -52,7 +52,7 @@ CPP = $(CPP) $(CPPFLAGS)
 # change "-g" in the CFLAGS and LIBFLAGS macro definitions to "-ggdb".
 #
 whoami := $(shell whoami)
-ifeq ('matthew',$(whoami))
+ifeq (matthew,$(whoami))
 # Home computer build profile
 INCLUDE =
 LIBDIRS =
