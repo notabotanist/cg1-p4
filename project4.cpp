@@ -1,4 +1,4 @@
-// File: project3.cpp
+// File: project4.cpp
 //
 // Author: Matthew MacEwan
 //
@@ -12,6 +12,7 @@
 #include "targets.h"
 #include "hud.h"
 #include "light.h"
+#include "texture.h"
 
 class StereoSceneViewport : public StereoViewport {
 public:
@@ -42,7 +43,10 @@ protected:
 		glTranslatef(0, height/2, 0);
 		glScalef(base, height, base);
 		if (solid) {
-			glutSolidCube(1.0);
+			//glutSolidCube(1.0);
+			renderTexCube(TextureLoader::getBuildingTex(),
+                          TextureLoader::getRoofTex(),
+                          height/base);
 		} else {
 			glutWireCube(1.0);
 		}
@@ -120,8 +124,12 @@ public:
 		//glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLight);
 		//glLightfv(GL_LIGHT1, GL_POSITION, moonDir);
 
+		glEnable(GL_TEXTURE_2D);
+
 		// defer to super
 		Scene::render();
+
+		glDisable(GL_TEXTURE_2D);
 	}
 };
 
@@ -309,6 +317,9 @@ int main( int argc, char* argv[] ) {
 	glutInitWindowSize(1000, 500);
 	glutCreateWindow(argv[0]);
 	glEnable(GL_LIGHTING);
+
+    // load textures
+    TextureLoader::loadTextures();
 
 	// create scene
 	LitScene theScene;

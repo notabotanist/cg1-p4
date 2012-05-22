@@ -54,7 +54,7 @@ CPP = $(CPP) $(CPPFLAGS)
 INCLUDE =
 LIBDIRS =
 
-LDLIBS = -lglut -lGLU -lGL -lXext -lX11 -lm
+LDLIBS = -lSOIL -lglut -lGLU -lGL -lXext -lX11 -lm
 
 CFLAGS = -g $(INCLUDE)
 CCFLAGS =  $(CFLAGS)
@@ -67,14 +67,14 @@ CCLIBFLAGS = $(LIBFLAGS)
 ########## End of flags from header.mak
 
 
-CPP_FILES =	camera.cpp hud.cpp project4.cpp scene.cpp stereo.cpp targets.cpp light.cpp
+CPP_FILES =	camera.cpp hud.cpp project4.cpp scene.cpp stereo.cpp targets.cpp light.cpp texture.cpp
 C_FILES =	
 PS_FILES =	
 S_FILES =	
-H_FILES =	camera.h hud.h scene.h stereo.h targets.h vecmath.h light.h
+H_FILES =	camera.h hud.h scene.h stereo.h targets.h vecmath.h light.h texture.h
 SOURCEFILES =	$(H_FILES) $(CPP_FILES) $(C_FILES) $(S_FILES)
 .PRECIOUS:	$(SOURCEFILES)
-OBJFILES =	camera.o hud.o scene.o stereo.o targets.o light.o
+OBJFILES =	camera.o hud.o scene.o stereo.o targets.o light.o texture.o
 
 #
 # Main targets
@@ -91,11 +91,12 @@ project4:	project4.o $(OBJFILES)
 
 camera.o:	camera.h
 hud.o:	camera.h hud.h scene.h light.h
-project4.o:	camera.h hud.h scene.h stereo.h targets.h light.h
+project4.o:	camera.h hud.h scene.h stereo.h targets.h light.h texture.h
 scene.o:	scene.h vecmath.h
 stereo.o:	camera.h stereo.h
 targets.o:	scene.h targets.h light.h
 light.o:	light.h
+texture.o:	texture.h
 
 #
 # Housekeeping
