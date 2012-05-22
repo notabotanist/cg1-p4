@@ -2,7 +2,11 @@
 using namespace std;
 
 #include "texture.h"
-#include <SOIL/SOIL.h>
+#ifdef LABMACHINE
+	#include<SOIL.h>
+#else
+	#include <SOIL/SOIL.h>
+#endif
 #include <GL/glut.h>
 
 GLuint TextureLoader::buildingTex(0);

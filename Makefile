@@ -51,6 +51,9 @@ CPP = $(CPP) $(CPPFLAGS)
 # If you want to take advantage of GDB's extra debugging features,
 # change "-g" in the CFLAGS and LIBFLAGS macro definitions to "-ggdb".
 #
+whoami := $(shell whoami)
+ifeq ('matthew',$(whoami))
+# Home computer build profile
 INCLUDE =
 LIBDIRS =
 
@@ -63,6 +66,44 @@ CXXFLAGS = $(CFLAGS)
 LIBFLAGS = -g $(LIBDIRS) $(LDLIBS)
 CLIBFLAGS = $(LIBFLAGS)
 CCLIBFLAGS = $(LIBFLAGS)
+else
+# CS lab machine build profile
+#
+# Include file locations
+#
+GLGLUTINC = /opt/csw/include
+SOILINC = /home/fac/wrc/include
+
+INCLUDE = -I$(GLGLUTINC) -I$(SOILINC)
+
+#
+# If you are working on a SPARC-based system (e.g., the compute server
+# 'queeg'), replace -lSOIL with -lSOIL-sparc in the LDLIBS macro.
+#
+GLGLUTLIB = /opt/csw/lib
+SOILLIB = /home/fac/wrc/lib
+
+GLGLUTLIBDIRS = -L$(GLGLUTLIB)
+SOILLIBDIRS = -L$(SOILLIB)
+
+LIBDIRS = $(GLGLUTLIBDIRS) $(SOILLIBDIRS)
+
+LDLIBS = -lSOIL -lglut -lGLU -lGL -lXmu -lXext -lX11 -lm
+
+#
+# Compilation and linking flags
+#
+# If you want to take advantage of GDB's extra debugging features,
+# change "-g" in the CFLAGS and LIBFLAGS macro definitions to "-ggdb".
+#
+CFLAGS = -g $(INCLUDE) -DLABMACHINE
+CCFLAGS =  $(CFLAGS)
+CXXFLAGS = $(CFLAGS)
+
+LIBFLAGS = -g $(LIBDIRS) $(LDLIBS)
+CLIBFLAGS = $(LIBFLAGS)
+CCLIBFLAGS = $(LIBFLAGS)
+endif
 
 ########## End of flags from header.mak
 
