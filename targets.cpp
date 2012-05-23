@@ -343,3 +343,13 @@ void Zeppelin::respawn() {
 	Target::respawn();
 	radPos = 0;
 }
+
+void Zeppelin::initNurb() {
+    shield = gluNewNurbsRenderer();
+    float ys[] = {0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0};
+    int index(0);
+    for (float x(-1.5); x <= 1.5; x += 1) {
+        for (float z(-1.5); z <= 1.5; z += 1) {
+        }
+    }
+}
