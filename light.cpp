@@ -100,6 +100,15 @@ void GlobalMaterials::setInterfaceMaterial(float r, float g, float b) {
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emissive);
 }
 
+void GlobalMaterials::setShieldMaterial() {
+	GlobalMaterials::setNoMaterial();
+	GLfloat diffuse[] = {0, 0, 1, 1};
+	GLfloat specular[] = {0, 0, 1, 1};
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialf(GL_FRONT, GL_SHININESS, 100);
+}
+
 ////////////
 // Light
 ////////////

@@ -108,6 +108,7 @@ Radar::Radar(float _x, float _y, float _z) : Target(_x, _y, _z), rotation(0), dR
 }
 
 void Radar::renderIdle() {
+	glEnable(GL_NORMALIZE);
 	glPushMatrix();
 	// Blender helped with the modeling
 
@@ -157,6 +158,7 @@ void Radar::renderIdle() {
 	glPopMatrix();
 
 	glPopMatrix();
+	glEnable(GL_NORMALIZE);
 }
 
 void Radar::renderReticle() {
@@ -256,6 +258,7 @@ Zeppelin::Zeppelin(float _x, float _y, float _z) : Target(_x, _y, _z),
 	searchlight.halfAngle = 60;
 	searchlight.exponent = 5;
 	searchlight.pitch = -120;
+	initNurb();
 }
 
 void Zeppelin::addGuardian(Target& guard) {
@@ -291,6 +294,7 @@ void Zeppelin::animate() {
 }
 
 void Zeppelin::renderIdle() {
+	glEnable(GL_NORMALIZE);
 	glPushMatrix();
 
 	// draw envelope
@@ -321,7 +325,11 @@ void Zeppelin::renderIdle() {
 	searchlight.render();
 	searchlight.renderBulb();
 
+	// The shield
+	renderNurb();
+
 	glPopMatrix();
+	glDisable(GL_NORMALIZE);
 }
 
 void Zeppelin::renderReticle() {
@@ -346,10 +354,36 @@ void Zeppelin::respawn() {
 
 void Zeppelin::initNurb() {
     shield = gluNewNurbsRenderer();
-    float ys[] = {0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0};
+    float ys[] = {0.8,0.8,0.8,0.8,0.8,2,2,0.8,0.8,2,2,0.8,0.8,0.8,0.8,0.8};
     int index(0);
-    for (float x(-1.5); x <= 1.5; x += 1) {
-        for (float z(-1.5); z <= 1.5; z += 1) {
+    for (int x(0); x < 4; x += 1) {
+        for (int z(0); z < 4; z += 1) {
+			cPoints[x][z][0] = -1.5 + x;
+			cPoints[x][z][2] = -1.5 + z;
+			cPoints[x][z][1] = ys[x + 4 * z];
         }
     }
+}
+
+void Zeppelin::renderNurb() {
+	if (solid) {
+		gluNurbsProperty(shield, GLU_DISPLAY_MODE, GLU_FILL);
+	} else {
+		gluNurbsProperty(shield, GLU_DISPLAY_MODE, GLU_OUTLINE_POLYGON);
+	}
+	GlobalMaterials::setShieldMaterial();
+
+	glEnable(GL_AUTO_NORMAL);
+	GLfloat knots[] = {0, 0, 0, 0.1, 0.9, 1, 1, 1};
+	gluBeginSurface(shield);
+	gluNurbsSurface(shield,
+					8, knots,
+					8, knots,
+					4 * 3,
+					3,
+					&cPoints[0][0][0],
+					4, 4,
+					GL_MAP2_VERTEX_3);
+	gluEndSurface(shield);
+	glDisable(GL_AUTO_NORMAL);
 }

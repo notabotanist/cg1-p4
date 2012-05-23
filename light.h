@@ -40,6 +40,7 @@ public:
     static void setExplosionMaterial();
     static void setLaserMaterial();
     static void setInterfaceMaterial(float r, float g, float b);
+	static void setShieldMaterial();
 };
 
 /// Class for positional & directional lights

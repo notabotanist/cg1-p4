@@ -77,7 +77,7 @@ public:
 	virtual void animate();
 };
 
-class GLUnurbsObj;
+//class GLUnurbsObj;
 
 /// Mobile enemy command fortress, protected by a number of shield generators
 /// Flies circular holding pattern around the city
@@ -105,6 +105,7 @@ protected:
 	virtual void renderReticle();
 
 	virtual void initNurb();
+	virtual void renderNurb();
 
 public:
 	Zeppelin(float _x = 0, float _y = 0, float _z = 0);
