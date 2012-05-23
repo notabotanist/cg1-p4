@@ -107,6 +107,8 @@ protected:
 	virtual void initNurb();
 	virtual void renderNurb();
 
+	bool isProtected();
+
 public:
 	Zeppelin(float _x = 0, float _y = 0, float _z = 0);
 

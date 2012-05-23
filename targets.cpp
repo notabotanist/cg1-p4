@@ -265,19 +265,36 @@ void Zeppelin::addGuardian(Target& guard) {
 	guardians.push_back(&guard);
 }
 
+bool Zeppelin::isProtected() {
+	// check all guardians
+	for (vector<Target*>::iterator iter(guardians.begin());
+			iter != guardians.end(); iter++) {
+		// if any one is not dead, the sheild caught the laser
+		if ((*iter)->state != T_DEAD) {
+			return true;
+			break;
+		}
+	}
+	return false;
+}
+
 void Zeppelin::animate() {
 	Target::animate();
 
 	// Sheild remains up while guardians alive
 	if (state == T_EXPLODING) {
 		// check all guardians
-		for (vector<Target*>::iterator iter(guardians.begin());
+		/*for (vector<Target*>::iterator iter(guardians.begin());
 				iter != guardians.end(); iter++) {
 			// if any one is not dead, the sheild caught the laser
 			if ((*iter)->state != T_DEAD) {
 				state = T_IDLE;
 				break;
 			}
+		}
+		*/
+		if (isProtected()) {
+			state = T_IDLE;
 		}
 	}
 
@@ -326,7 +343,9 @@ void Zeppelin::renderIdle() {
 	searchlight.renderBulb();
 
 	// The shield
-	renderNurb();
+	if (isProtected()) {
+		renderNurb();
+	}
 
 	glPopMatrix();
 	glDisable(GL_NORMALIZE);
@@ -363,6 +382,7 @@ void Zeppelin::initNurb() {
 			cPoints[x][z][1] = ys[x + 4 * z];
         }
     }
+	gluNurbsProperty(shield, GLU_CULLING, GLU_TRUE);
 }
 
 void Zeppelin::renderNurb() {
