@@ -1,13 +1,14 @@
 Computer Graphics 1
-Project 3 README
+Project 4 README
 Matthew MacEwan
 -----------------------------
 
 Developed and tested on Ubuntu machines at home and in the lab.
 
 Building Instructions:
-No special procedure required.  Use the provided makefile and it should work
-just fine.
+I had to nastily modify the Makefile so that it would work both at home and on
+the lab machines, due to the different locations of SOIL.  Please be sure to
+use the included Makefile.
 
 Scene:
 This program renders a stereoscopic viewport of the scene.  It is a cross-eye
@@ -21,3 +22,9 @@ will mark it for orbital bombardment.  Note that the on-screen reticle is
 positioned in space in front of the camera, so placing a radar station in the
 middle of either of the reticles will cause a miss.  Should you click the mouse
 while pointing at an invalid target, a red X will flash as indication.
+
+The city is occupied by an enemy force, coordinated by the patrolling command
+zeppelin.  Your objective is to destroy the zeppelin, but it is guarded from
+orbital attack by a set of shield generators positioned around the city.
+First paint the generators; when they are all destroyed, the zeppelin's shield
+will go down.

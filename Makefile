@@ -116,6 +116,7 @@ H_FILES =	camera.h hud.h scene.h stereo.h targets.h vecmath.h light.h texture.h
 SOURCEFILES =	$(H_FILES) $(CPP_FILES) $(C_FILES) $(S_FILES)
 .PRECIOUS:	$(SOURCEFILES)
 OBJFILES =	camera.o hud.o scene.o stereo.o targets.o light.o texture.o
+IMGFILES = building.png ground.png generator.png roof.png
 
 #
 # Main targets
@@ -145,8 +146,8 @@ texture.o:	texture.h
 
 Archive:	archive.tgz
 
-archive.tgz:	$(SOURCEFILES) Makefile README
-	tar cf - $(SOURCEFILES) Makefile README | gzip > archive.tgz
+archive.tgz:	$(SOURCEFILES) $(IMGFILES) Makefile README
+	tar cf - $(SOURCEFILES) $(IMGFILES) Makefile README | gzip > archive.tgz
 
 clean:
 	-/bin/rm $(OBJFILES) project4.o core 2> /dev/null

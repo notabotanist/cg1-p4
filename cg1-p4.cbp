@@ -86,6 +86,8 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="texture.cpp" />
+		<Unit filename="texture.h" />
 		<Unit filename="vecmath.h">
 			<Option target="Debug" />
 			<Option target="Release" />
